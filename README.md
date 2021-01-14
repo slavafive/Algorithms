@@ -14,5 +14,5 @@ In January I decided to join ITMO Pilot Academy course and advance my skills in 
 * Solve 1A, 1B, 1C
 
 ### January 14
-* Segment with Maximal Sum
-* Solve 2A
+* Segment with Maximal Sum, K-th One
+* Solve 2A, 2B
