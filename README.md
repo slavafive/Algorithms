@@ -15,4 +15,4 @@ In January I decided to join ITMO Pilot Academy course and advance my skills in 
 
 ### January 14
 * Segment with Maximal Sum, K-th One
-* Solve 2A, 2B
+* Solve 2A', 2B, 2C'
