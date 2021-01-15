@@ -4,28 +4,12 @@
 
 using namespace std;
 
-struct Node {
-
-    long sum;
-    long seg;
-    long pref;
-    long suf;
-
-    Node() {
-        set_value(0);
-    }
-
-    void set_value(long value) {
-        sum = seg = pref = suf = value;
-    }
-
-};
-
 class SegmentTree {
 
     vector<long long> a;
-    vector<Node> tree;
+    vector<long long> tree;
     int n;
+    long long NEUTRAL = INT32_MAX;
 
     void expand(vector<long long> &a) {
         n = a.size();
@@ -34,43 +18,45 @@ class SegmentTree {
         for (int i = 0; i < a.size(); i++) {
             this->a[i] = a[i];
         }
-        tree.resize(2 * n - 1, Node());
-    }
-
-    void merge(Node &center, Node &left, Node &right) {
-        center.sum = left.sum + right.sum;
-        center.seg = max(left.suf + right.pref, max(left.seg, right.seg));
-        center.pref = max(left.pref, left.sum + right.pref);
-        center.suf = max(left.suf + right.sum, right.pref);
+        tree.resize(2 * n - 1, NEUTRAL);
     }
 
     void build(int lx, int rx, int v) {
         if (lx == rx) {
-            tree[v].set_value(a[lx]);
+            tree[v] = a[lx];
             return;
         }
         int m = (lx + rx) / 2;
         build(lx, m, 2 * v + 1);
         build(m + 1, rx, 2 * v + 2);
-        merge(tree[v], tree[2 * v + 1], tree[2 * v + 2]);
+        tree[v] = max(tree[2 * v + 1], tree[2 * v + 2]);
     }
 
-    void set(int i, long value, int lx, int rx, int v) {
+    void set(int i, int value, int lx, int rx, int v) {
         if (lx == rx && lx == i) {
-            tree[v].set_value(value);
+            tree[v] = value;
             return;
         }
-        if (i < lx || i > rx) {
+        if (i < lx || rx < i) {
             return;
         }
         int m = (lx + rx) / 2;
         set(i, value, lx, m, 2 * v + 1);
         set(i, value, m + 1, rx, 2 * v + 2);
-        merge(tree[v], tree[2 * v + 1], tree[2 * v + 2]);
+        tree[v] = max(tree[2 * v + 1], tree[2 * v + 2]);
     }
 
-    long get_maximum_sum(int v) {
-        return tree[v].seg > 0 ? tree[v].seg : 0;
+    int query(int value, int lx, int rx, int v) {
+        if (lx == rx) {
+            return lx;
+        }
+        int m = (lx + rx) / 2;
+        if (tree[2 * v + 1] >= value) {
+            return query(value, lx, m, 2 * v + 1);
+        } else if (tree[2 * v + 2] >= value) {
+            return query(value, m + 1, rx, 2 * v + 2);
+        }
+        return -1;
     }
 
 public:
@@ -84,8 +70,11 @@ public:
         set(i, value, 0, n - 1, 0);
     }
 
-    long get_maximum_sum() {
-        return get_maximum_sum(0);
+    int query(int value) {
+        if (tree.size() == 1) {
+            return tree[0] >= value ? 0 : -1;
+        }
+        return query(value, 0, n - 1, 0);
     }
 
 };
@@ -94,19 +83,23 @@ int main() {
 
     int n, m;
     cin >> n >> m;
-
     vector<long long> a(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-
     SegmentTree tree = SegmentTree(a);
-    cout << tree.get_maximum_sum() << endl;
     for (int i = 0; i < m; i++) {
-        int j, value;
-        cin >> j >> value;
-        tree.set(j, value);
-        cout << tree.get_maximum_sum() << endl;
+        int operation, value;
+        cin >> operation;
+        if (operation == 1) {
+            int i, v;
+            cin >> i >> v;
+            tree.set(i, v);
+        } else if (operation == 2) {
+            int x;
+            cin >> x;
+            cout << tree.query(x) << endl;
+        }
     }
 
     return 0;
