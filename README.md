@@ -22,3 +22,6 @@ In January I decided to join ITMO Pilot Academy course and advance my skills in 
 
 ### January 16
 * Solve 3A, 3B
+
+### January 18
+* Solve 3C
