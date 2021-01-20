@@ -28,3 +28,6 @@ In January I decided to join ITMO Pilot Academy course and advance my skills in 
 
 ### January 19
 * Solve 3D
+
+### January 20
+* Solve 3E
