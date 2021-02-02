@@ -31,3 +31,11 @@ In January I decided to join ITMO Pilot Academy course and advance my skills in 
 
 ### January 20
 * Solve 3E, 4A, 4B
+
+Started learning DSU
+
+### January 21
+* Solve 1A
+
+### January 22
+* Solve 1B
