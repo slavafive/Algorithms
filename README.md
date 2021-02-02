@@ -9,13 +9,10 @@ Useful resources:
 In January I decided to join ITMO Pilot Academy course and advance my skills in Segment Trees (part 1).
 
 ### January 13
-* Segment tree with maximum sum
-* Minimum and other functions
 * Solve 1A, 1B, 1C
 
 ### January 14
-* Segment with Maximal Sum, K-th One
-* Solve 2A', 2B, 2C
+* Solve 2A, 2B, 2C
 
 ### January 15
 * Solve 2D
@@ -39,3 +36,10 @@ Started learning DSU
 
 ### January 22
 * Solve 1B
+
+## February
+
+Started learning binary search
+
+### February 2
+* Solve 1A, 1B, 1C, 1D
